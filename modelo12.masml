@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<masml:MasmlClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:masml="masml">
+  <ownedAgentClass name="AgenteA"/>
+  <ownedAgentClass name="AgenteC"/>
+  <ownedAgentClass name="AgenteB"/>
+  <ownedAssociation>
+    <source href="diagrama1.masml#//@ownedAgentClass.0"/>
+    <target href="diagrama1.masml#//@ownedAgentClass.1"/>
+  </ownedAssociation>
+  <ownedAssociation>
+    <source href="default2.masml#//@ownedAgentClass.0"/>
+    <target href="default2.masml#//@ownedAgentClass.1"/>
+  </ownedAssociation>
+</masml:MasmlClassDiagram>

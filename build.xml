@@ -1,0 +1,41 @@
+<project default="loadModels">
+		
+	<target name="loadModels">
+		 
+		<epsilon.emf.register file="masml.ecore"/>
+		
+		<epsilon.emf.loadModel name="modelo1"
+		                               modelFile="diagrama1.masml"
+		                               metamodelUri="masml"
+		                               read="true" store="false"/>
+		
+		<epsilon.emf.loadModel name="modelo2"
+		                               modelFile="default2.masml"
+		                               metamodelUri="masml"
+		                               read="true" store="false"/>
+ 
+		<epsilon.emf.loadModel name="modelo12"
+		                               modelFile="modelo12.masml"
+		                               metamodelUri="masml"
+		                               read="false" store="true"/>
+		
+	</target>
+	
+	<target name="merge" depends="compare">
+		<epsilon.eml src="MergeMasml.eml"
+			usematchtrace="matchTrace">
+			<model ref="modelo1" alias="Source"/>
+			<model ref="modelo2" alias="Source"/>
+			<model ref="modelo12"/>
+		</epsilon.eml>
+	</target>
+	
+	<target name="compare" depends="loadModels">
+		<epsilon.ecl src="CompareMasml.ecl" 
+			exportmatchtrace="matchTrace">
+			<model ref="modelo1" alias="Source"/>
+			<model ref="modelo2" alias="Source"/>
+		</epsilon.ecl>
+	</target>
+	
+</project>

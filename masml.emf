@@ -1,0 +1,59 @@
+@namespace(uri="modelos", prefix="")
+package modelos;
+
+class MasmlClassDiagram {
+	val ~AgentClass[*] ownedAgentClass;
+}
+
+class ~OrganizationClass extends ~Classifier{
+	
+}
+
+class ~AgentClass extends ~Classifier{
+	val ~Belief[*] ownedBelief;
+	val ~Goal[*] ownedGoal;
+}
+
+class ~Belief extends ~Property{
+	
+}
+
+class ~Goal extends ~Property{
+	
+}
+
+class ~Property extends ~StructuralFeature{
+	
+}
+
+class ~StructuralFeature extends ~Feature{
+	
+}
+
+class ~Feature extends ~RedefinableElement{
+		
+}
+
+class ~RedefinableElement extends ~NamedElement{
+	
+}
+
+class ~Classifier extends ~Type{
+	
+}
+
+class ~Type extends ~PackageableElement{
+	
+}
+
+class ~PackageableElement extends ~NamedElement{
+	
+}
+
+class ~NamedElement extends ~Element{
+	
+}
+
+class ~Element {
+	attr String name;
+}

@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="masml"
+    nsURI="masml" nsPrefix="masml">
+  <eClassifiers xsi:type="ecore:EClass" name="Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="UseCase" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature" eSuperTypes="#//RedefinableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featuringClassifier" upperBound="-1"
+        eType="#//Classifier" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Classifier" eSuperTypes="#//Type #//Namespace #//RedefinableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StructuralFeature" eSuperTypes="#//Feature #//TypedElement #//MultiplicityElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BehavioralFeature" eSuperTypes="#//Feature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParamenter" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="raisedException" upperBound="-1"
+        eType="#//Type" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
+        eType="#//Operation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProperty" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1"
+        eType="#//Class"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AgentClass" eSuperTypes="#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owendAction" lowerBound="1"
+        upperBound="-1" eType="#//ActionClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedGoal" upperBound="-1"
+        eType="#//Goal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBelief" upperBound="-1"
+        eType="#//Belief" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPlan" upperBound="-1"
+        eType="#//PlanClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sentMessage" upperBound="-1"
+        eType="#//AgentMessageClass" eOpposite="#//AgentMessageClass/sender"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receiveMessage" upperBound="-1"
+        eType="#//AgentMessageClass" eOpposite="#//AgentMessageClass/receiver"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inhabit" lowerBound="1"
+        eType="#//Inhabit" eOpposite="#//Inhabit/agentClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="play" lowerBound="1" upperBound="-1"
+        eType="#//Play" eOpposite="#//Play/agent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1"
+        eType="#//AgentClass" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPerception" upperBound="-1"
+        eType="#//Perception" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPlanning" upperBound="-1"
+        eType="#//Planning" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//StructuralFeature">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isComposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="association" eType="#//Association"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningAssociation" eType="#//Association"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="redefinedProperty" upperBound="-1"
+        eType="#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsettedProperty" upperBound="-1"
+        eType="#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aggregation" eType="#//AggregationType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//BehavioralFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLeaf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOrdered" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isQuery" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStatic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="postcondition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="precondition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="redefinedOperation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bodyCondition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="returnValue" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameter" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionClass" eSuperTypes="#//BehavioralFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="precondition" upperBound="-1"
+        eType="#//Constraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" upperBound="-1"
+        eType="#//Constraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionSemantics" eType="#//ActionSemantics"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//VisibilityKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageableElement" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="#//PackageableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Namespace" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRule" upperBound="-1"
+        eType="#//Constraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RedefinableElement" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrganizationClass" eSuperTypes="#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedGoal" lowerBound="1"
+        upperBound="-1" eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBelief" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPlan" lowerBound="1"
+        upperBound="-1" eType="#//PlanClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAction" lowerBound="1"
+        upperBound="-1" eType="#//ActionClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sentMessage" upperBound="-1"
+        eType="#//AgentMessageClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receiveMessage" upperBound="-1"
+        eType="#//AgentMessageClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inhabit" lowerBound="1"
+        eType="#//Inhabit" eOpposite="#//Inhabit/org"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="play" lowerBound="1" upperBound="-1"
+        eType="#//Play"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1"
+        eType="#//OrganizationClass" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownership" upperBound="-1"
+        eType="#//Ownership" eOpposite="#//Ownership/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="play_in" upperBound="-1"
+        eType="#//Play" eOpposite="#//Play/org"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAgentRole" eType="#//AgentRoleClass"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owenedObjectRole" eType="#//ObjectRoleClass"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AgentRoleClass" eSuperTypes="#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedGoal" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDuty" upperBound="-1"
+        eType="#//ActionClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRight" upperBound="-1"
+        eType="#//ActionClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="play" lowerBound="1" eType="#//Play"
+        eOpposite="#//Play/agentRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownership" lowerBound="1"
+        eType="#//Ownership" eOpposite="#//Ownership/agentRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="control" upperBound="-1"
+        eType="#//Control" eOpposite="#//Control/controlled"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1"
+        eType="#//AgentRoleClass" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBelief" upperBound="-1"
+        eType="#//Belief" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="performative" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reply_to" upperBound="-1"
+        eType="#//Classifier" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="encoding" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ontology" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" upperBound="-1"
+        eType="#//ProtocolClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conversation_id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reply_with" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="in_reply_to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reply_by" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectRoleClass" eSuperTypes="#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
+        eType="#//Operation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="play" lowerBound="1" eType="#//Play"
+        eOpposite="#//Play/objectRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownership" lowerBound="1"
+        eType="#//Ownership" eOpposite="#//Ownership/objectRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnvironmentClass" eSuperTypes="#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
+        eType="#//Operation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProperty" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inhabit" upperBound="-1"
+        eType="#//Inhabit" eOpposite="#//Inhabit/env"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedClass" upperBound="-1"
+        eType="#//Class" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOrganization" upperBound="-1"
+        eType="#//OrganizationClass" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AgentMessageClass" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sender" eType="#//AgentClass"
+        eOpposite="#//AgentClass/sentMessage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleSender" eType="#//AgentRoleClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receiver" upperBound="-1"
+        eType="#//AgentClass" eOpposite="#//AgentClass/receiveMessage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleReceiver" upperBound="-1"
+        eType="#//AgentRoleClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOrdered" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlanClass" eSuperTypes="#//BehavioralFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owendGoal" lowerBound="1"
+        upperBound="-1" eType="#//Goal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAction" lowerBound="1"
+        upperBound="-1" eType="#//ActionClass" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Duty" eSuperTypes="#//ActionClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Right" eSuperTypes="#//ActionClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="#//BehavioralFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messages" lowerBound="1"
+        upperBound="-1" eType="#//AgentMessageClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Relationship" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relatedElement" lowerBound="1"
+        upperBound="-1" eType="#//Element"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DirectedRelationship" eSuperTypes="#//Relationship"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//Relationship #//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDerived" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedEnd" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberEnd" lowerBound="2"
+        upperBound="-1" eType="#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endType" upperBound="-1"
+        eType="#//Type" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="navigableOwnedEnd" upperBound="-1"
+        eType="#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLeaf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceMultiplicity" eType="#//MultiplicityKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetMultiplicity" eType="#//MultiplicityKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="representation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="#//DirectedRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supplier" lowerBound="1"
+        upperBound="-1" eType="#//NamedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="client" lowerBound="1"
+        upperBound="-1" eType="#//NamedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ownership" eSuperTypes="#//DirectedRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="agentRole" eType="#//AgentRoleClass"
+        eOpposite="#//AgentRoleClass/ownership"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectRole" eType="#//ObjectRoleClass"
+        eOpposite="#//ObjectRoleClass/ownership"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//OrganizationClass"
+        eOpposite="#//OrganizationClass/ownership"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Inhabit" eSuperTypes="#//DirectedRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subOrg" eType="#//OrganizationClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="agentClass" eType="#//AgentClass"
+        eOpposite="#//AgentClass/inhabit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="org" eType="#//OrganizationClass"
+        eOpposite="#//OrganizationClass/inhabit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="env" lowerBound="1" eType="#//EnvironmentClass"
+        eOpposite="#//EnvironmentClass/inhabit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Control" eSuperTypes="#//DirectedRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controller" lowerBound="1"
+        eType="#//AgentRoleClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlled" lowerBound="1"
+        eType="#//AgentRoleClass" eOpposite="#//AgentRoleClass/control"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Play" eSuperTypes="#//DirectedRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="agent" eType="#//AgentClass"
+        eOpposite="#//AgentClass/play"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="agentRole" eType="#//AgentRoleClass"
+        eOpposite="#//AgentRoleClass/play"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectRole" eType="#//ObjectRoleClass"
+        eOpposite="#//ObjectRoleClass/play"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="org" eType="#//OrganizationClass"
+        eOpposite="#//OrganizationClass/play_in"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Generalization" eSuperTypes="#//DirectedRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="general" lowerBound="1"
+        eType="#//Classifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specific" lowerBound="1"
+        eType="#//Classifier"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="#//Property">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPlan" eType="#//PlanClass"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Belief" eSuperTypes="#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constrainedElement" upperBound="-1"
+        eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//Namespace"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraintSpecification"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MasmlClassDiagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOrganizationClass"
+        upperBound="-1" eType="#//OrganizationClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedEnvironmentClass"
+        upperBound="-1" eType="#//EnvironmentClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAgentClass" upperBound="-1"
+        eType="#//AgentClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedClass" upperBound="-1"
+        eType="#//Class" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPlay" upperBound="-1"
+        eType="#//Play" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedGeneralization" upperBound="-1"
+        eType="#//Generalization" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDependency" upperBound="-1"
+        eType="#//Dependency" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAssociation" upperBound="-1"
+        eType="#//Association" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAggregation" upperBound="-1"
+        eType="#//Aggregation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedComposite" upperBound="-1"
+        eType="#//Composite" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInhabit" upperBound="-1"
+        eType="#//Inhabit" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOwnership" upperBound="-1"
+        eType="#//Ownership" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedObjectRoleClass" upperBound="-1"
+        eType="#//ObjectRoleClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAgentRoleClass" upperBound="-1"
+        eType="#//AgentRoleClass" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VisibilityKind">
+    <eLiterals name="public" literal="+"/>
+    <eLiterals name="private" literal="-"/>
+    <eLiterals name="protected" literal="#"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement #//MultiplicityElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+        eType="#//ParameterDirectionKind" defaultValueLiteral="in"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//Operation"
+        derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParameterDirectionKind">
+    <eLiterals name="in"/>
+    <eLiterals name="inout"/>
+    <eLiterals name="out"/>
+    <eLiterals name="return"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AggregationType">
+    <eLiterals name="none"/>
+    <eLiterals name="shared"/>
+    <eLiterals name="composite"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Aggregation" eSuperTypes="#//Association"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Composite" eSuperTypes="#//Association"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataType">
+    <eLiterals name="String"/>
+    <eLiterals name="Integer" value="1"/>
+    <eLiterals name="Double" value="3"/>
+    <eLiterals name="Char" value="4"/>
+    <eLiterals name="Long" value="5"/>
+    <eLiterals name="Boolean" value="6"/>
+    <eLiterals name="List" value="7"/>
+    <eLiterals name="Float" value="8"/>
+    <eLiterals name="Byte" value="9"/>
+    <eLiterals name="Date" value="10"/>
+    <eLiterals name="Short" value="11"/>
+    <eLiterals name="Map" value="12"/>
+    <eLiterals name="Enumerator" value="13"/>
+    <eLiterals name="Void"/>
+    <eLiterals name="Null" literal=" "/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MultiplicityKind">
+    <eLiterals name="One" literal="1"/>
+    <eLiterals name="ZeroOne" literal="0..1"/>
+    <eLiterals name="ZeroMulti" literal="0..*"/>
+    <eLiterals name="Multi" literal="*"/>
+    <eLiterals name="OneMulti" literal="1..*"/>
+    <eLiterals name="Null"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Perception" eSuperTypes="#//BehavioralFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Planning" eSuperTypes="#//BehavioralFeature"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ActionSemantics">
+    <eLiterals name="DefaultSemantics" literal=" "/>
+    <eLiterals name="NextFunction" value="1" literal="&lt;&lt;next-function>>"/>
+    <eLiterals name="UtilityFunction" value="2" literal="&lt;&lt;Utility-Function>>"/>
+    <eLiterals name="FormulateProblemFunction" value="3" literal="&lt;&lt;formulate-problem-function>>"/>
+    <eLiterals name="FormulateGoalFunction" value="4" literal="&lt;&lt;formulate-goal-function>>"/>
+  </eClassifiers>
+</ecore:EPackage>
