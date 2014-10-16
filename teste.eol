@@ -1,0 +1,18 @@
+XMLDoc.root = new `t_masml:MasmlClassDiagram`;
+var a : new t_ownedAgentClass;
+var b : new t_ownedAgentClass;
+a.a_name = "AgenteA";
+b.a_name = "AgenteB";
+
+beliefA = new t_ownedBelief;
+beliefA.b_name = "BeliefA";
+beliefB = new t_ownedBelief;
+beliefB.b_name = "BeliefB";
+
+a.ownedBelief = beliefA;
+b.ownedBelief = beliefB;
+
+
+
+XMLDoc.root.appendChild(a);
+XMLDoc.root.appendChild(b);

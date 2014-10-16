@@ -1,0 +1,53 @@
+rule MergeModel
+	merge l : modelo1!MasmlClassDiagram 
+	with r : modelo2!MasmlClassDiagram
+	into t : modelo12!MasmlClassDiagram {
+	
+	t.ownedAgentClass ::= l.ownedAgentClass + r.ownedAgentClass;
+	t.ownedAssociation ::= l.ownedAssociation + r.ownedAssociation;	
+}
+
+rule MergeAgentClass
+	merge l : modelo1!AgentClass 
+	with r : modelo2!AgentClass  
+	into t : modelo12!AgentClass {
+	
+	t.name := r.name;
+}
+
+rule MergeAssociation
+	merge l : modelo1!Association 
+	with r : modelo2!Association  
+	into t : modelo12!Association {
+	
+	t.source := l.source;
+	t.target := r.source;	
+}
+
+rule MergeOrganization
+	merge l: modelo!OrganizationClass
+	with r: modelo2!OrganizationClass
+	into t: modelo12!OrganizationClass{
+		t.nome := l.nome;
+}
+
+rule CopyModel
+	transform s : Source!MasmlClassDiagram to t : modelo12!MasmlClassDiagram {
+		t.ownedAgentClass ::= s.ownedAgentClass;
+}
+
+rule CopyAgentClass
+	transform s : Source!AgentClass to t : modelo12!AgentClass {
+	t.name := s.name;
+}
+
+rule CopyOrganization
+	transform s : Source!OrganizationClass to t : modelo12!OrganizationClass {
+	t.name := s.name;
+}
+
+rule CopyAssociation 
+	transform s : Source!Association to t : modelo12!Association {
+		t.source := s.source;
+		t.target := s.target;
+}
