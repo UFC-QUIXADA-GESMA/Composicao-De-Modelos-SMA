@@ -9,14 +9,16 @@ rule AgentClass
 	with r : modelo2!AgentClass {
 	compare{
 			return l.name = r.name
-			and
-			l.play.all.exists(playL | r.play.all.selectOne(playR | playR.agentRole.name == playL.agentRole.name));
-			/*and 
-			((l.ownedBelief.all.size() > 0 and r.ownedBelief.all.size() > 0) or 
-			 (l.ownedBelief.all.size() == 0 and r.ownedBelief.all.size() == 0))
-		    and 
-		    ((l.ownedGoal.all.size() > 0 and r.ownedGoal.all.size() > 0) or 
-			 (l.ownedGoal.all.size() == 0 and r.ownedGoal.all.size() == 0))*/
+			and 
+			((l.all.exists(al | r.all.selectOne(ar | ar.name == al.name and 
+			((ar.agentownedBelief.all.size() > 0 and al.agentownedBelief.all.size() > 0) or 
+			(ar.agentownedBelief.all.size() == 0 and al.agentownedBelief.all.size() == 0))
+			and ((ar.ownedAction.all.size() == 0 and al.ownedAction.size() == 0) or ( ar.ownedAction.all.size() > 0 and
+			al.ownedAction.all.size() > 0 )) and al.ownedAction.all.exists(ala | ar.all.selectOne(ara | 
+			(ara.actionSemantics == 1 and ala.actionSemantics == 1) or
+			(ara.actionSemantics == 2 and ala.actionSemantics == 2) 
+			))))))
+			;
 	}
 }
 
@@ -32,3 +34,21 @@ rule Organization
 	with r: modelo2!Organization{
 	compare : l.name = r.name	
 }
+
+rule AgentRoleClass 
+	match l : modelo1!AgentRoleClass 
+	with r : modelo2!AgentRoleClass {
+	compare{
+			return l.name = r.name
+			and 
+			((l.all.exists(al | r.all.selectOne(ar | ar.name == al.name and 
+			((ar.agentownedBelief.all.size() > 0 and al.agentownedBelief.all.size() > 0) or 
+			(ar.agentownedBelief.all.size() == 0 and al.agentownedBelief.all.size() == 0)) and
+			((ar.agentownedGoal.all.size() > 0 and al.agentownedGoal.all.size() > 0) or 
+			(ar.agentownedGoal.all.size() == 0 and al.agentownedGoal.all.size() == 0))
+			
+			))));
+		   
+	}
+}
+
