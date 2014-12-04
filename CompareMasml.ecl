@@ -32,8 +32,22 @@ rule Association
 rule Organization
 	match l : modelo1!Organization
 	with r: modelo2!Organization{
-	compare : l.name = r.name	
+	compare : l.name == r.name
+		and 
+		l.all.exists(oL | r.all.selectOne(oR | oL.name == oR.name)
+		and
+		((oR.agentownedBelief.all.size() > 0 and oL.agentownedBelief.all.size() > 0) or 
+			(oR.agentownedBelief.all.size() == 0 and oL.agentownedBelief.all.size() == 0))
+		and
+		((oR.sentMessage.all.size() == 0 and oL.sentMessage.all.size() == 0) or
+			(oR.sentMessage.all.size() > 0 and oL.sentMessage.all.size() > 0)
+		and
+		((oR.receiveMessage.all.size() == 0 and oL.receiveMessage.all.size() == 0) or
+			(oR.receiveMessage.all.size() > 0 and oL.receiveMessage.all.size() > 0)
+		))) 	
 }
+
+
 
 rule AgentRoleClass 
 	match l : modelo1!AgentRoleClass 

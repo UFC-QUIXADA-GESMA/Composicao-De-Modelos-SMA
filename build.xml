@@ -2,7 +2,7 @@
 		
 	<target name="loadModels">
 		 
-		<epsilon.emf.register file="masml.ecore"/>
+		<!--<epsilon.emf.register file="masml.ecore"/>-->
 		
 		<epsilon.emf.loadModel name="modelo1"
 		                               modelFile="diagrama1.masml"
